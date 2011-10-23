@@ -162,11 +162,11 @@ static int parse_mount_flags(char *mount_flags)
 static int process_config(VolumeManager *vm) {
     FILE *fp;
     int n = 0;
-    char line[255];
+    char line[1024];
     Volume *vol = 0;
 
     if ((fp = fopen("/proc/cmdline", "r"))) {
-        while (fscanf(fp, "%s", line) > 0) {
+        while (fscanf(fp, "%1023s", line) > 0) {
             if (!strncmp(line, "SDCARD=", 7)) {
                 const char *sdcard = line + 7;
                 if (*sdcard) {
